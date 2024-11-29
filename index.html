@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="conteudo">
+        
+    </div>
+    <script>
+        async function processarDados() {
+            const resposta = await fetch('https://fakestoreapi.com/products');
+            const json = await resposta.json();
+            const conteudo = document.getElementById('conteudo');
+            for (const produto of json) {
+                conteudo.innerHTML += `
+                <p><b>${produto.title}</b></p>
+                <p>${produto.description}</p>
+                <p>Preço: R$ ${produto.price.toFixed(2)}</p>
+                <p>${produto.category}</p>
+                <img src='${produto.image}' width='100'>
+                `;
+            }
+        }
+        processarDados()
+    </script>
+</body>
+
+</html>
